@@ -1,0 +1,150 @@
+{# template me #}
+{#{% extends 'parent/base.html' %}#}
+{#{% load blog_tags %}#}
+{#{% block title %}ticket{% endblock %}#}
+{#{% block content %}#}
+{#    <form method="post">#}
+{#    روش اول برای نمایش فرم#}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{#        <input type="submit" value="ثبت تیکت">#}
+{#    روش دوم برای نمایش فرم#}
+{#    {% csrf_token %}#}
+{#    {% for field in form %}#}
+{#        {{ field.label_tag }}#}
+{#        {{ field }}#}
+{#        {{ field.errors }}#}
+{#    {% endfor %}#}
+{#     <input type="submit" value="ثبت تیکت">#}
+{#    روش سوم برای نمایش فرم#}
+{#    {% csrf_token %}#}
+{#        <label for="name">نام و نام خانوداگی :</label>#}
+{#        <input type="text" name="name" id="name"#}
+{#                {% if form.name.value %} value="{{ form.name.value}}" {% endif %} required>#}
+{#        <span>{% if form.name.errors %}{{ form.name.errors }}{% endif %}</span>#}
+{#        <br><br>#}
+{#        <label for="email">ایمیل :</label>#}
+{#        <input type="email" name="email" id="email"#}
+{#                {% if form.email.value %} value="{{ form.email.value }}" {% endif %} required>#}
+{#        <span>{% if form.email.errors %}{{ form.email.errors }}{% endif %}</span>#}
+{#        <br><br>#}
+{#        <label for="phone">شماره تلفن :</label>#}
+{#        <input type="text" name="phone" id="phone"#}
+{#                {% if form.phone.value %} value="{{ form.phone.value}}" {% endif %} required>#}
+{#        <span>{% if form.phone.errors %}{{ form.phone.errors }}{% endif %}</span>#}
+{#        <br><br>#}
+{#        <label for="subject">موضوع :</label>#}
+{#        <select name="subject" id="subject">#}
+{#            <option value="انتقاد"#}
+{#                    {% if form.subject.value == "انتقادات" %}selected{% endif %}>انتقادات</option>#}
+{#            <option value="پیشنهاد"#}
+{#                    {% if form.subject.value == "پیشنهادات" %}selected{% endif %}>پیشنهادات</option>#}
+{#            <option value="گزارش"#}
+{#                    {% if form.subject.value == "گزارشات" %}selected{% endif %}>گزارشات</option>#}
+{#        </select>#}
+{#        <span>{% if form.subject.errors %}{{ form.subject.errors }}{% endif %}</span>#}
+{#        <br><br>#}
+{#        <label for="message">پیام :</label>#}
+{#        <textarea name="message" id="message">#}
+{#            {% if form.message.value %} {{ form.message.value }} {% endif %}#}
+{#        </textarea>#}
+{#        <span>{% if form.message.errors %}{{ form.message.errors }}{% endif %}</span>#}
+{#        <br><br>#}
+{#        <input type="submit" value="ثبت تیکت">#}
+{#    </form>#}
+{##}
+{##}
+{#    {% if form.errors %}#}
+{#        <p>خطاهای زیر رو بر طرف کن</p>#}
+{#        {% for field in form %}#}
+{#            {% if field.errors %}#}
+{#                {% for error in field.errors %}#}
+{#                    <p>{{ field.label }} : {{ error }}</p>#}
+{#                {% endfor %}#}
+{#            {% endif %}#}
+{#        {% endfor %}#}
+{#    {% endif %}#}
+{##}
+{#    {% if  form.non_field_errors %}#}
+{#        {{ form.non_field_errors }}#}
+{#    {% endif %}#}
+{#{% endblock %}#}
+{# end template me #}
+{# ------------------------------------------------------ #}
+
+{% extends 'parent/base.html' %}
+{% block title %}ticket form{% endblock %}
+{% block content %}
+<section class="py-4">
+	<div class="container">
+    <div class="row pb-4">
+			<div class="col-12">
+        <!-- Title -->
+        <h1 class="mb-0 h3">ارسال تیکت به پشتیبانی</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<!-- Chart START -->
+				<div class="card border h-100">
+					<!-- Card body -->
+					<div class="card-body">
+            <!-- Form START -->
+
+    <form method="post">
+    {% csrf_token %}
+        نام و نام خانوادگی:
+    <input type="text" name="name" required class="form-control" placeholder=""
+            {% if form.name.value %} value="{{ form.name.value }}" {% endif %}>
+
+        <br>
+        ایمیل:
+    <input type="email" name="email" class="form-control" placeholder
+            {% if form.email.value %} value="{{ form.email.value }}" {% endif %} >
+
+        <br>
+        شماره تماس:
+    <input type="text" name="phone" required maxlength="11" class="form-control"
+    {% if form.phone.value %} value="{{ form.phone.value }}" {% endif %}>
+        <br>
+        متن:
+    <textarea class="form-control" rows="3" name="message">{% if form.message.value %}{{ form.message.value }}{% endif %}</textarea>
+        <br>
+
+    <select name="subject" class="form-select">
+        <option value="پیشنهاد"
+                {% if form.subject.value == 'پیشنهاد' %} selected {% endif %}>
+            پیشنهادات</option>
+        <option value="انتقاد"
+        {% if form.subject.value == 'انتقاد' %} selected {% endif %}>
+            انتقادات</option>
+        <option value="گزارش"
+                {% if form.subject.value == 'گزارش' %} selected {% endif %}>
+            گزارش</option>
+    </select>
+        <br>
+    <button class="btn btn-primary" type="submit">ارسال تیکت</button>
+    </form>
+                    <!-- Form END -->
+        </div>
+    </div><!-- Chart END -->
+</div>
+    </div>
+	</div>
+</section>
+    {% if form.errors %}
+        لطفا خطاهای زیر را اصلاح کنید!
+        <br>
+        {% for field in form %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    {{ field.label }} : {{ error }}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {%  if form.non_field_errors %}
+        {{ form.non_field_errors }}
+    {% endif %}
+{% endblock %}
