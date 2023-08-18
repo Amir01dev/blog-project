@@ -19,4 +19,5 @@
 ![comment post system](https://s6.uupload.ir/files/comment_99gw.png)
 - Ticket sending system
 ![ticket sending system](https://s6.uupload.ir/files/ticket_kyks.png)
+- Markdown language support
 - It has key features such as professional search, edit user, deleting posts, editing posts, leaving the site, changing passwords, recovering passwords, dark and light theme etc.
