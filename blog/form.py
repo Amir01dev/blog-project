@@ -1,5 +1,6 @@
 from django import forms
 from .models import Comment, Post, User, Account
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class TicketForm(forms.Form):
@@ -69,7 +70,7 @@ class CreatePostForm(forms.ModelForm):
 
 
 # login form👇🏻
-# class LoginForm(forms.Form):
+# class LoginForm(AuthenticationForm):
 #     username = forms.CharField(max_length=250, required=True)
 #     password = forms.CharField(max_length=250, required=True, widget=forms.PasswordInput)
 
