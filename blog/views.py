@@ -49,7 +49,7 @@ def post_detail(request, pk):
     # try:
     #     post = Post.published.get(id=pk)
     # except:
-    #     return Http404()
+    #     raise Http404("Not Found :((")
     comments = post.comments.filter(active=True)
     form = CommentForm()
     context = {
